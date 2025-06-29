@@ -17,6 +17,11 @@ jobs:
     - name: Setup Emscripten
       uses: mymindstorm/setup-emsdk@v13
       
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mesa-common-dev libx11-dev libasound2-dev libxi-dev
+      
     - name: Create build directory
       run: mkdir -p build
       
