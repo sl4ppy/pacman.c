@@ -4,12 +4,23 @@ A Pacman clone written in C99 with minimal dependencies for Windows, macOS, Linu
 
 [WASM version](https://floooh.github.io/pacman.c/pacman.html)
 
+**🌐 Web Version**: [Play Pacman.c Online](https://your-username.github.io/pacman.c/)
+
 For implementation details see comments in the pacman.c source file (I've tried
 to structure the source code so that it can be read from top to bottom).
 
 Related projects:
 
 - Zig version: https://github.com/floooh/pacman.zig
+
+## 🚀 Quick Start - Web Version
+
+The easiest way to play is through your web browser:
+
+1. Visit the [web version](https://your-username.github.io/pacman.c/)
+2. Use arrow keys or WASD to move Pacman
+3. Eat all dots to complete each level
+4. Eat power pellets to turn ghosts blue and eat them
 
 ## Clone, Build and Run (Linux, macOS, Windows)
 
@@ -64,6 +75,28 @@ To run the compilation result in the system web browser:
 > emrun pacman.html
 ```
 
+## 🎮 Controls
+
+- **Arrow Keys** or **WASD** - Move Pacman
+- **Space** - Start game
+- **Escape** - Exit game
+- Eat all dots to complete each level
+- Eat power pellets to turn ghosts blue and eat them
+- Avoid ghosts when they're not blue!
+
+## 🚀 Deploy to GitHub Pages
+
+This repository includes GitHub Actions to automatically build and deploy the WASM version to GitHub Pages:
+
+1. Fork this repository
+2. Enable GitHub Pages in your repository settings:
+   - Go to Settings → Pages
+   - Source: Deploy from a branch
+   - Branch: `gh-pages` (will be created automatically)
+   - Folder: `/ (root)`
+3. Push to the `main` branch to trigger automatic deployment
+4. Your game will be available at `https://your-username.github.io/pacman.c/`
+
 ## IDE Support
 
 On Windows with Visual Studio cmake will automatically create a **Visual Studio** solution file which can be opened with ```cmake --open .```:
@@ -89,3 +122,7 @@ take over from there:
 cd pacman.c
 code .
 ```
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

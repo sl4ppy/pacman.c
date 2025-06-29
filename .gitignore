@@ -1,2 +1,14 @@
 .vscode/
 build/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.wasm
+*.js
+*.html
+*.data
+.DS_Store
+Thumbs.db

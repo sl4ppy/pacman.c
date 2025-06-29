@@ -1,0 +1,35 @@
+{
+  "name": "pacman.c",
+  "version": "1.0.0",
+  "description": "A faithful Pacman clone written in C99, compiled to WebAssembly",
+  "main": "index.html",
+  "scripts": {
+    "build": "mkdir -p build && cd build && emcmake cmake -G\"Unix Makefiles\" -DCMAKE_BUILD_TYPE=MinSizeRel .. && cmake --build .",
+    "serve": "cd build && emrun pacman.html",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "pacman",
+    "game",
+    "c99",
+    "webassembly",
+    "emscripten",
+    "arcade",
+    "retro"
+  ],
+  "author": "Andre Weissflog",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/floooh/pacman.c.git"
+  },
+  "bugs": {
+    "url": "https://github.com/floooh/pacman.c/issues"
+  },
+  "homepage": "https://floooh.github.io/pacman.c/",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+} 
