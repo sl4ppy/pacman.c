@@ -1,0 +1,1 @@
+/home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/emcc -Os -DNDEBUG --shell-file ../sokol/shell.html -sUSE_WEBGL2=1 -sNO_FILESYSTEM=1 -sASSERTIONS=0 -sMALLOC=emmalloc --closure=1 @CMakeFiles/pacman.dir/objects1.rsp -o pacman.html @CMakeFiles/pacman.dir/linkLibs.rsp

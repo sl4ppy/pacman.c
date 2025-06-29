@@ -1,0 +1,2 @@
+/home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/emar qc libsokol.a CMakeFiles/sokol.dir/sokol/sokol.c.o
+/home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/emranlib libsokol.a

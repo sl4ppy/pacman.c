@@ -1,0 +1,4 @@
+/home/runner/work/pacman.c/pacman.c/build/CMakeFiles/sokol.dir
+/home/runner/work/pacman.c/pacman.c/build/CMakeFiles/pacman.dir
+/home/runner/work/pacman.c/pacman.c/build/CMakeFiles/edit_cache.dir
+/home/runner/work/pacman.c/pacman.c/build/CMakeFiles/rebuild_cache.dir

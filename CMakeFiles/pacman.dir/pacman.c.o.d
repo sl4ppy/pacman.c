@@ -1,0 +1,30 @@
+CMakeFiles/pacman.dir/pacman.c.o: \
+  /home/runner/work/pacman.c/pacman.c/pacman.c \
+  /home/runner/work/pacman.c/pacman.c/sokol/sokol_app.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/lib/clang/21/include/stddef.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/stddef.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/lib/clang/21/include/__stddef_header_macro.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/lib/clang/21/include/__stddef_ptrdiff_t.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/lib/clang/21/include/__stddef_size_t.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/lib/clang/21/include/__stddef_wchar_t.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/lib/clang/21/include/__stddef_null.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/lib/clang/21/include/__stddef_max_align_t.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/lib/clang/21/include/__stddef_offsetof.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/lib/clang/21/include/stdint.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/stdint.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/bits/alltypes.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/bits/stdint.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/lib/clang/21/include/stdbool.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/stdbool.h \
+  /home/runner/work/pacman.c/pacman.c/sokol/sokol_gfx.h \
+  /home/runner/work/pacman.c/pacman.c/sokol/sokol_audio.h \
+  /home/runner/work/pacman.c/pacman.c/sokol/sokol_log.h \
+  /home/runner/work/pacman.c/pacman.c/sokol/sokol_glue.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/assert.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/features.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/compat/string.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/string.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/strings.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/compat/stdlib.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/stdlib.h \
+  /home/runner/work/_temp/0a7f07ea-d8a2-4a83-aef5-eb1c66013ac5/emsdk-main/upstream/emscripten/cache/sysroot/include/alloca.h
