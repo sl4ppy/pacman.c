@@ -458,6 +458,7 @@ static struct {
         ghost_t ghost[NUM_GHOSTS];
         pacman_t pacman;
         fruit_t active_fruit;
+        uint8_t speed_multiplier;       // speed multiplier for Pacman (1=normal, 2=2x, 3=3x)
     } game;
 
     // the current input state
@@ -469,6 +470,7 @@ static struct {
         bool right;
         bool esc;       // only for debugging (see DBG_ESCACPE)
         bool anykey;
+        bool speed_toggle;      // toggle speed hack
     } input;
 
     // the audio subsystem is essentially a Namco arcade board sound emulator
@@ -791,6 +793,16 @@ static void input(const sapp_event* ev) {
                     break;
                 case SAPP_KEYCODE_ESCAPE:
                     state.input.esc = state.input.anykey = btn_down;
+                    break;
+                case SAPP_KEYCODE_SPACE:
+                    if (btn_down && !state.input.speed_toggle) {
+                        // Cycle through speed multipliers: 1x -> 2x -> 3x -> 1x
+                        state.game.speed_multiplier++;
+                        if (state.game.speed_multiplier > 3) {
+                            state.game.speed_multiplier = 1;
+                        }
+                    }
+                    state.input.speed_toggle = state.input.anykey = btn_down;
                     break;
                 default:
                     state.input.anykey = btn_down;
@@ -1438,6 +1450,7 @@ static void game_init(void) {
     state.game.global_dot_counter = 0;
     state.game.num_dots_eaten = 0;
     state.game.score = 0;
+    state.game.speed_multiplier = 1;
 
     // draw the playfield and PLAYER ONE READY! message
     vid_clear(TILE_SPACE, COLOR_DOT);
@@ -1570,6 +1583,16 @@ static void game_update_tiles(void) {
     vid_color_score(i2(6,1), COLOR_DEFAULT, state.game.score);
     if (state.game.hiscore > 0) {
         vid_color_score(i2(16,1), COLOR_DEFAULT, state.game.hiscore);
+    }
+    
+    // show speed multiplier indicator
+    if (state.game.speed_multiplier > 1) {
+        static const char* speed_labels[] = {"", "", "2X SPEED", "3X SPEED"};
+        if (state.game.speed_multiplier < 4) {
+            vid_color_text(i2(23,0), 0x9, speed_labels[state.game.speed_multiplier]);
+        }
+    } else {
+        vid_color_text(i2(23,0), 0x10, "        ");
     }
 
     // update the energizer pill colors (blinking/non-blinking)
@@ -1724,7 +1747,16 @@ static bool game_pacman_should_move(void) {
         return false;
     }
     else {
-        return 0 != (state.timing.tick % 8);
+        if (state.game.speed_multiplier == 2) {
+            // 2x speed: move 3 out of 4 ticks
+            return 0 != (state.timing.tick % 4);
+        } else if (state.game.speed_multiplier == 3) {
+            // 3x speed: move every tick (2 out of 2)
+            return true;
+        } else {
+            // Normal speed: move 7 out of 8 ticks
+            return 0 != (state.timing.tick % 8);
+        }
     }
 }
 
@@ -2105,8 +2137,15 @@ static void game_update_actors(void) {
         }
         // move into the selected direction
         if (can_move(actor->pos, actor->dir, allow_cornering)) {
-            actor->pos = move(actor->pos, actor->dir, allow_cornering);
-            actor->anim_tick++;
+            // Move based on speed multiplier
+            for (int i = 0; i < state.game.speed_multiplier; i++) {
+                if (can_move(actor->pos, actor->dir, allow_cornering)) {
+                    actor->pos = move(actor->pos, actor->dir, allow_cornering);
+                    actor->anim_tick++;
+                } else {
+                    break;  // Stop if we hit a wall
+                }
+            }
         }
         // eat dot or energizer pill?
         const int2_t tile_pos = pixel_to_tile_pos(actor->pos);
