@@ -148,6 +148,7 @@
 #define DBG_ESCAPE          (0)     // set to (1) to leave game loop with Esc
 #define DBG_DOUBLE_SPEED    (0)     // set to (1) to speed up game (useful with godmode)
 #define DBG_GODMODE         (0)     // set to (1) to disable dying
+#define PACMAN_SPEED_HACK   (1)     // set to (1) to enable speed hack (Pacman moves faster)
 
 // NOTE: DO NOT CHANGE THESE DEFINES TO AN ENUM
 // gcc-13 will turn the backing type into an unsigned integer which then
@@ -1450,7 +1451,7 @@ static void game_init(void) {
     state.game.global_dot_counter = 0;
     state.game.num_dots_eaten = 0;
     state.game.score = 0;
-    state.game.speed_multiplier = 1;
+    //state.game.speed_multiplier = PACMAN_SPEED_HACK ? 2 : 1;;
 
     // draw the playfield and PLAYER ONE READY! message
     vid_clear(TILE_SPACE, COLOR_DOT);

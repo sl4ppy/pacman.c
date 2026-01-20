@@ -1,58 +1,46 @@
-cmake_minimum_required(VERSION 3.20)
-project(pacman)
-set(CMAKE_C_STANDARD 11)
+cmake_minimum_required(VERSION 3.16)
+project(pacman C)
 
-# Linux -pthread shenanigans
-if (CMAKE_SYSTEM_NAME STREQUAL Linux)
-    set(THREADS_PREFER_PTHREAD_FLAG ON)
+set(CMAKE_C_STANDARD 99)
+
+# Add sokol directory to include paths
+include_directories(sokol)
+
+# Define SOKOL_IMPL to compile implementations
+add_definitions(-DSOKOL_IMPL)
+add_definitions(-DSOKOL_TRACE_HOOKS)
+
+# Compiler warnings
+if(MSVC)
+    add_compile_options(/W3)
+else()
+    add_compile_options(-Wall -Wextra -Wsign-compare)
+endif()
+
+if(APPLE)
+    enable_language(OBJC)
+    add_definitions(-DSOKOL_METAL)
+    set_source_files_properties(pacman.c PROPERTIES LANGUAGE OBJC)
+    
+    find_library(COCOA_FRAMEWORK Cocoa)
+    find_library(QUARTZCORE_FRAMEWORK QuartzCore)
+    find_library(METAL_FRAMEWORK Metal)
+    find_library(METALKIT_FRAMEWORK MetalKit)
+    find_library(AUDIOTOOLBOX_FRAMEWORK AudioToolbox)
+    find_library(AVFOUNDATION_FRAMEWORK AVFoundation)
+    
+    set(LIBS ${COCOA_FRAMEWORK} ${QUARTZCORE_FRAMEWORK} ${METAL_FRAMEWORK} ${METALKIT_FRAMEWORK} ${AUDIOTOOLBOX_FRAMEWORK} ${AVFOUNDATION_FRAMEWORK})
+elseif(WIN32)
+    add_definitions(-DSOKOL_D3D11)
+    set(LIBS kernel32 user32 shell32 gdi32 dxgi d3d11)
+else()
+    add_definitions(-DSOKOL_GLCORE)
+    find_package(OpenGL REQUIRED)
     find_package(Threads REQUIRED)
+    
+    # On Linux we need X11, Xi, Xcursor, ALSA (asound), dl, m
+    set(LIBS ${OPENGL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} X11 Xi Xcursor asound dl m)
 endif()
 
-#=== LIBRARY: sokol
-# add headers to the the file list because they are useful to have in IDEs
-set(SOKOL_HEADERS
-    sokol/sokol_gfx.h
-    sokol/sokol_app.h
-    sokol/sokol_audio.h
-    sokol/sokol_glue.h)
-add_library(sokol STATIC sokol/sokol.c ${SOKOL_HEADERS})
-if(CMAKE_SYSTEM_NAME STREQUAL Darwin)
-    # compile sokol.c as Objective-C
-    target_compile_options(sokol PRIVATE -x objective-c)
-    target_link_libraries(sokol
-        "-framework QuartzCore"
-        "-framework Cocoa"
-        "-framework MetalKit"
-        "-framework Metal"
-        "-framework OpenGL"
-        "-framework AudioToolbox")
-else()
-    if (CMAKE_SYSTEM_NAME STREQUAL Linux)
-        target_link_libraries(sokol INTERFACE X11 Xi Xcursor GL asound dl m)
-        target_link_libraries(sokol PUBLIC Threads::Threads)
-    endif()
-endif()
-target_include_directories(sokol INTERFACE sokol)
-
-#=== EXECUTABLE: pacman
-if(CMAKE_SYSTEM_NAME STREQUAL Windows)
-    add_executable(pacman WIN32 pacman.c)
-else()
-    add_executable(pacman pacman.c)
-endif()
-target_link_libraries(pacman sokol)
-if (CMAKE_SYSTEM_NAME STREQUAL Emscripten)
-    set(CMAKE_EXECUTABLE_SUFFIX ".html")
-    target_link_options(pacman PUBLIC --shell-file ../sokol/shell.html)
-    target_link_options(pacman PUBLIC -sUSE_WEBGL2=1 -sNO_FILESYSTEM=1 -sASSERTIONS=0 -sMALLOC=emmalloc --closure=1)
-endif()
-if (MSVC)
-    target_compile_options(pacman PUBLIC /W3)
-else()
-    target_compile_options(pacman PUBLIC -Wall -Wextra -Wsign-compare)
-endif()
-
-# explicitly strip dead code
-if (CMAKE_C_COMPILER_ID MATCHES "Clang" AND NOT CMAKE_SYSTEM_NAME STREQUAL Emscripten)
-    target_link_options(pacman PRIVATE LINKER:-dead_strip)
-endif()
+add_executable(pacman pacman.c)
+target_link_libraries(pacman ${LIBS})
